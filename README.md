@@ -41,7 +41,7 @@ Tenho foco em Java com springboot.
 
 <div align = "center">
 
-<a href="www.linkedin.com/in/devnavarro](https://www.linkedin.com/in/kleberton-bispo-santos-78057738/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>&nbsp;
+<a href="www.linkedin.com/in/kleberton-bispo-santos](https://www.linkedin.com/in/kleberton-bispo-santos-78057738/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>&nbsp;
 <a href="mailto:ti.klebersantos@gmail.com" target="_blank"><img src="https://img.shields.io/badge/-gmail-red?style=for-the-badge&logo=Gmail&logoColor=white"></a>&nbsp;
 
 </div>
