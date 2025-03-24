@@ -1,35 +1,43 @@
-name: Generate GitHub Snake
+name: Update GitHub Snake
 
 on:
+  workflow_dispatch:       # Permite executar manualmente
   schedule:
-    - cron: "0 */12 * * *"  # A cada 12 horas
-  workflow_dispatch:
+    - cron: '0 */6 * * *'  # Roda a cada 6 horas (ajuste se quiser)
   push:
     branches:
-      - main
+      - main              # Dispara quando houver push na main
 
 jobs:
-  generate:
+  generate-snake:
     runs-on: ubuntu-latest
+    
     steps:
-      # Gera a versão light
-      - uses: Platane/snk@master
-        with:
-          github_user_name: kleberton-santos
-          svg_out_path: dist/github-contribution-grid-snake.svg
-          
-      # Gera a versão dark
-      - uses: Platane/snk@master
-        with:
-          github_user_name: kleberton-santos
-          svg_out_path: dist/github-contribution-grid-snake-dark.svg
-          colors: "bg:0f172a! gr:334155! gu:475569! pu:64748b! op:f1f5f9"
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      # Publica no branch output
-      - uses: crazy-max/ghaction-github-pages@v3
+      # Gera a cobrinha (versão light)
+      - name: Generate Snake (Light Mode)
+        uses: Platane/snk@master
         with:
-          target_branch: output
-          build_dir: dist
-          keep_files: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_user_name: kleberton-santos  # Seu nome de usuário
+          svg_out_path: dist/snake.svg
+          github_feed: "contribution"  # OBRIGATÓRIO para pegar commits
+
+      # Gera a cobrinha (versão dark)
+      - name: Generate Snake (Dark Mode)
+        uses: Platane/snk@master
+        with:
+          github_user_name: kleberton-santos
+          svg_out_path: dist/snake-dark.svg
+          colors: "bg:0f172a! gr:334155! gu:475569! pu:64748b! op:f1f5f9"
+          github_feed: "contribution"
+
+      # Envia para o branch 'output'
+      - name: Deploy Snake to Output Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: output
+          keep_files: true  # Mantém arquivos antigos
